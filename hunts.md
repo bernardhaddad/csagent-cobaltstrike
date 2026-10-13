@@ -1,10 +1,9 @@
-# Cobalt Strike posing as CrowdStrike: hunts
+# hunts
 
-Signed Cobalt Strike sideloaded by a real DropboxUpdate.exe out of an ISO, beaconing to Azure
-with Falcon-looking traffic. IOCs in `iocs.csv`. Queries are Falcon LogScale / NG-SIEM (CQL)
-using standard Falcon event names; check field names on your tenant before scheduling.
+Falcon LogScale / NG-SIEM queries. Standard Falcon event names, but check the field names on
+your tenant before you schedule anything. IOCs are in iocs.csv.
 
-## 1. Straight IOC sweep
+## 1. IOC sweep
 
 ```
 #event_simpleName=DnsRequest
@@ -113,14 +112,13 @@ Falcon telemetry won't show the HTTPS user agent. In proxy logs, look for:
 
 ## Notes
 
-- Lure themes so far: US "SSA-Statement-<date>-<time>.iso" (from 11 Sep), then UK GOV.UK
-  "compensation-recovery-statement-<n>.iso" (Oct).
-- Signer names rotate; each cert is valid for 3 days (Ashley Marie Boynton alone had three
-  certs on 2, 3 and 4 Oct). Issuers seen: "Microsoft ID Verified CS AOC CA 03", "AOC CA 04"
-  and "EOC CA 04". Treat files signed by an individual's name through those CAs, arriving
-  in an ISO, as suspect. Thumbprints are in iocs.csv.
-- All 5 ISOs contain the same DropboxUpdate.exe (7655221b...) and goopdate.dll; the 4 October
-  ISOs share the same decoy PDF (f0ac088b...).
-- C2 DNS first seen 27 Aug 2026, about two weeks before the first sample.
-- 20.51.202.31 resolved to an unrelated site in 2020; it's shared Azure space, so don't
-  block-and-forget on the IP alone.
+- ISO names: "SSA-Statement-<date>-<time>.iso" in September, "compensation-recovery-statement-<n>.iso"
+  in October (GOV.UK decoy).
+- New signer name every few days, each cert valid 3 days. Ashley Marie Boynton had three
+  certs on 2, 3 and 4 Oct. Issuers: Microsoft ID Verified CS AOC CA 03, AOC CA 04, EOC CA 04.
+  A DLL out of an ISO signed in a person's name through those CAs is worth a look.
+- Every ISO has the same DropboxUpdate.exe (7655221b...). The goopdate.dll is different each
+  time. The four October ISOs share the same decoy PDF (f0ac088b...).
+- The C2 first resolved on 27 Aug, about two weeks before the first sample.
+- 20.51.202.31 is shared Azure space (it pointed at an unrelated site in 2020), so don't rely
+  on the IP alone.

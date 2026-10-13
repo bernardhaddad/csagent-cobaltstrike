@@ -1,13 +1,10 @@
-"""Static Beacon config extraction for the goopdate.dll loader in this campaign.
+"""Pull the beacon config out of the goopdate.dll loader without running it.
 
-Usage: python -I extract_beacon_config.py goopdate.dll
+python -I extract_beacon_config.py goopdate.dll
 
-Nothing is executed. Steps:
-1. take the longest base64 string in the loader (.rdata) and decode it
-2. layout: u32 version, u32 key_len (192), u32 size, u32 size, key[key_len], body[size]
-3. body XOR key (repeating) -> Beacon PE (MZ patched to 'AIBJ', PE sig to 'CS', sections obfuscated)
-4. Beacon config is XOR 0x2e; entries are TLV (u16 id, u16 type, u16 len) in shuffled order,
-   so find the chain by walking rather than by the first entry
+The loader keeps the beacon as base64 in .rdata: 16 byte header (version, key length, size,
+size), a 192 byte key, then the beacon XORed with that key. Config is the usual XOR 0x2e,
+but the entries are shuffled, so walk the chain instead of looking for the first entry.
 """
 
 import base64
