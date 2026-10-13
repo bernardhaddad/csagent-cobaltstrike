@@ -38,6 +38,7 @@ sha256,7d23213dc26b048ea2ad2f8359fadbe35c97b844012759bd0915b31d387638b2,2026-10-
 sha256,19427b8b6f4fccdb15c7ba4a8aaed1e3e0f1476537cfa7ce15ddaac3004e8cba,2026-10-05,first seen,medium,Unsigned DLL (RunPayload); contacts C2; generic label
 sha256,4ed40c2e0703f328bd10acea6b87cdc22737e30e85e8f438f1e93a0c46371a53,2026-10-05,first seen,medium,Unsigned DLL (RunPayload); contacts C2; generic label
 sha256,6e4ca598bf2e8f23281e611f3cea05c9b55766b1909b16cfc72e3b763fed6af4,2026-10-05,first seen,medium,Unsigned DLL (RunPayload); contacts C2; generic label
+sha256,8db864d12eba46e00e556c3502f0e7882af7c64ca205b68b6bd19fe424e5e493,2026-10-13,first seen,high,Unsigned DLL; contacts C2; CobaltStrikeBeacon; 27/75 cobaltstrike label
 sha256,f0ac088b2a48c93ef515497ed482d39790e9d0e6a59968338ffc39ac8d632638,,,high,Decoy GOV.UK PDF named win.dll inside the 4 October ISOs (not malicious itself; campaign marker)
 sha256,9eda4e352c9ef560636e898535b51140e59148fb813919e4d4ea80cfb9026edc,,,high,Decoy PDF named UTIL.SYS inside the September SSA ISO (not malicious itself; campaign marker)
 context_only,7655221b493047c61285e1de78807d0584920b0d14d150e2487da9728b1926f3,,,high,LEGIT Dropbox-signed DropboxUpdate.exe found in all 5 ISOs as the sideload host. Do NOT block by hash; hunt it outside Dropbox paths

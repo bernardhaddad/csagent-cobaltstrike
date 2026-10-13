@@ -43,7 +43,8 @@ in(field="SHA256HashData", values=[
  "19427b8b6f4fccdb15c7ba4a8aaed1e3e0f1476537cfa7ce15ddaac3004e8cba",
  "4ed40c2e0703f328bd10acea6b87cdc22737e30e85e8f438f1e93a0c46371a53",
  "6e4ca598bf2e8f23281e611f3cea05c9b55766b1909b16cfc72e3b763fed6af4",
- "3a849c16c3e9ffc90db8fe61de2a7a8c5f8cb3fb61bef48d6285ab467c4fdd42"])
+ "3a849c16c3e9ffc90db8fe61de2a7a8c5f8cb3fb61bef48d6285ab467c4fdd42",
+ "8db864d12eba46e00e556c3502f0e7882af7c64ca205b68b6bd19fe424e5e493"])
 | groupBy([ComputerName, #event_simpleName, ImageFileName, SHA256HashData], function=count())
 ```
 
