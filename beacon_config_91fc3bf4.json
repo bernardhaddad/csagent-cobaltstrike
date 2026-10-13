@@ -1,0 +1,45 @@
+{
+  "Port": 443,
+  "SleepTime_ms": 60000,
+  "Jitter_pct": 25,
+  "MaxGetSize": 2097257,
+  "C2Server": "asiioasdjasiojasodijasa.eastus.cloudapp.azure.com,/api/v2/crowdstrike/entities/sensor-update-policy/v2",
+  "HttpPost_Metadata": [
+    "Accept: application/json",
+    "&Content-Type: application/octet-stream",
+    ".X-CS-AGENTID: a3f7c2e18b4d4f6a9e2c1d5f8a7b3e9c",
+    "X-CS-VERSION: 7.04.18110.0",
+    "Connection: keep-alive",
+    "DetectionSummary",
+    "status",
+    "resolved",
+    "severity_low",
+    "informal",
+    "timestamp_s",
+    "2025-03-22T14:28:33",
+    "detection_id"
+  ],
+  "HttpPost_Verb": "POST",
+  "PostURI": "/api/v2/crowdstrike/entities/detections/v2",
+  "PublicKey": {
+    "der_sha256": "14e5aca1e0aaf70951e22fc12b78705565675437d4d9d95eabd9327b1fe40001"
+  },
+  "Spawnto_x86": "%windir%\\syswow64\\msiexec.exe -Embedding",
+  "bStageCleanup": 1,
+  "HttpGet_Verb": "GET",
+  "Watermark": 1817228496,
+  "Spawnto_x64": "%windir%\\sysnative\\msiexec.exe -Embedding",
+  "HttpGet_Metadata": [
+    "8Accept: application/octet-stream, application/json;q=0.9",
+    "\"Accept-Encoding: gzip, deflate, br",
+    "Accept-Language: en-US",
+    "Connection: keep-alive",
+    ".X-CS-AGENTID: a3f7c2e18b4d4f6a9e2c1d5f8a7b3e9c",
+    "X-CS-VERSION: 7.04.18110.0",
+    "falcon_session=",
+    "Cookie"
+  ],
+  "bUsesCookies": 1,
+  "BeaconType": 8,
+  "UserAgent": "CrowdStrike CsAgent/7.04.18110.0 (Windows 10.0.19045; x64)"
+}
