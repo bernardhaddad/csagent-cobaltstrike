@@ -5,27 +5,29 @@ Running since at least September 2026.
 
 ## The chain
 
-An ISO (volume label `DropboxUpdate`) with three files:
+The ISO I took apart (compensation-recovery-statement-7688891603.iso, volume label
+`DropboxUpdate`) has three files:
 
 - `compensation-recovery-statement-pdf.exe` - the real DropboxUpdate.exe 1.3.537.5, signed
-  by Dropbox. Built on Google's Omaha updater, so it loads `goopdate.dll` from its own
-  folder and calls `DllEntry`.
+  by Dropbox. It's built on Google's Omaha updater and references `goopdate.dll` and
+  `DllEntry`, which is exactly what the loader exports.
 - `goopdate.dll` - the loader. MinGW build, exports only `DllEntry`, signed through
   Microsoft's code signing service with a 3 day cert in a person's name.
 - `win.dll` - not a DLL, a PDF. GOV.UK logo, "Secure File Access", update Acrobat.
 
 The loader copies `win.dll` to `%TEMP%\cam_numbers_<x>.pdf` and opens it (the name is fixed
-per build), then decrypts the beacon it carries.
+per build), and carries the beacon encrypted.
 
-Earlier ISOs were named `SSA-Statement-<date>-<time>.iso`, later ones
-`compensation-recovery-statement-<n>.iso`. Every one so far has the same DropboxUpdate.exe.
+The September ISO was named `SSA-Statement-<date>-<time>.iso` (its decoy is called
+`UTIL.SYS`), the October ones `compensation-recovery-statement-<n>.iso`. All five ISOs I
+found have the same DropboxUpdate.exe and a different goopdate.dll.
 
 ## The beacon
 
 The loader holds a base64 blob: 16 byte header, 192 byte key, then the beacon XORed with
 that key. The beacon has `MZ` swapped for `AIBJ`, `PE` for `CS` and obfuscated section
-names. Config is the usual XOR 0x2e, but the entries are shuffled, which is why older
-parsers stop after a couple of fields. `extract_beacon_config.py` walks it statically.
+names. Config is the usual XOR 0x2e, but the entries are shuffled, which is why 1768.py
+stopped after two fields for me. `extract_beacon_config.py` walks it statically.
 
 What's in it (`beacon_config_91fc3bf4.json`):
 
@@ -43,17 +45,18 @@ Watermark       1817228496
 PubKey sha256   14e5aca1e0aaf70951e22fc12b78705565675437d4d9d95eabd9327b1fe40001
 ```
 
-Nothing in the config goes after the sensor. The CrowdStrike name is there for the proxy
-logs.
+Nothing in the config goes after the sensor. The CrowdStrike name looks like it's just
+there to blend into proxy logs.
 
 ## Certs
 
 Four names, six certs so far, each valid 3 days. Issuers seen: Microsoft ID Verified CS AOC
-CA 03, AOC CA 04 and EOC CA 04. Three of the six were already revoked when I checked.
+CA 03, AOC CA 04 and EOC CA 04. At least three of the six had been revoked by Microsoft
+when I checked.
 Thumbprints are in `iocs.csv`.
 
 In the sample I took apart, the DLL compile time, the signing time and the ISO creation
-time are all 2026-10-13 13:44 UTC. Build, sign and package are automated.
+time are all 2026-10-13 13:44 UTC, so build, sign and package look automated.
 
 ## Files
 
@@ -65,8 +68,7 @@ time are all 2026-10-13 13:44 UTC. Build, sign and package are automated.
 
 The YARA and the queries are experimental. The YARA matches the loader and the ISO here and
 not the Dropbox EXE or the decoy, but I haven't run it over a clean set or the other loaders
-yet.
-Check the queries' field names on your tenant before scheduling them.
+yet. Check the queries' field names on your tenant before scheduling them.
 
 No samples in here.
 

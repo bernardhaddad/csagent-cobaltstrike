@@ -119,6 +119,6 @@ Falcon telemetry won't show the HTTPS user agent. In proxy logs, look for:
   A DLL out of an ISO signed in a person's name through those CAs is worth a look.
 - Every ISO has the same DropboxUpdate.exe (7655221b...). The goopdate.dll is different each
   time. The four October ISOs share the same decoy PDF (f0ac088b...).
-- The C2 first resolved on 27 Aug, about two weeks before the first sample.
+- The C2 domain was first seen resolving on 27 Aug, about two weeks before the first sample.
 - 20.51.202.31 is shared Azure space (it pointed at an unrelated site in 2020), so don't rely
   on the IP alone.
