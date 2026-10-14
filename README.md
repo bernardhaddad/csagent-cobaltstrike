@@ -26,8 +26,8 @@ found have the same DropboxUpdate.exe and a different goopdate.dll.
 
 The loader holds a base64 blob: 16 byte header, 192 byte key, then the beacon XORed with
 that key. The beacon has `MZ` swapped for `AIBJ`, `PE` for `CS` and obfuscated section
-names. Config is the usual XOR 0x2e, but the entries are shuffled, which is why 1768.py
-stopped after two fields for me. `extract_beacon_config.py` walks it statically.
+names. Config is the usual XOR 0x2e, but the entries are shuffled, which is why a standard
+config parser stopped after two fields for me. `extract_beacon_config.py` walks it statically.
 
 What's in it (`beacon_config_91fc3bf4.json`):
 
